@@ -95,6 +95,6 @@ body::after {
   left: 0;
   width: 100%;
   height: 180px;
-  background: url('oc-banner.png') no-repeat bottom center/contain;
+  background: url('bottom-background.png') no-repeat bottom center/contain;
   z-index: 3;
 }
