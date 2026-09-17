@@ -1,0 +1,100 @@
+/* Import Google Font dạng chữ bo tròn tròn xòe siêu cute */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  /* Màu nền cam tươi ấm áp */
+  background-color: #fca751; 
+  font-family: 'Fredoka', cursive, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  color: #ffffff;
+}
+
+/* Tiêu đề HAPPY NEW YEAR Countdown */
+h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 2rem;
+  z-index: 2;
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+}
+
+/* Dải băng màu cam nhạt chạy ngang làm nền cho các số */
+#countdown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.25); /* Dải băng trong suốt */
+  padding: 1.5rem 0;
+  z-index: 2;
+}
+
+/* Khung từng cụm số (Days, Hours, Minutes, Seconds) */
+.time-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Con số đếm ngược to tròn */
+.number {
+  font-size: 5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #ffffff;
+  /* Viền chữ nhẹ cho nét số nổi bật */
+  text-shadow: 3px 3px 0px rgba(220, 120, 30, 0.4); 
+}
+
+/* Nhãn chữ (Days, Hours...) nằm ngay dưới số */
+.label {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 0.2rem;
+  color: #ffffff;
+  opacity: 0.95;
+}
+
+/* Lời chúc Giao thừa khi đếm về 0 */
+#message {
+  font-size: 3rem;
+  font-weight: 700;
+  z-index: 2;
+  text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.15);
+}
+body::before {
+  content: "";
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  background: url('leaf.png') no-repeat center/contain;
+  opacity: 0.4; /* Độ mờ của ngôi sao nét vẽ */
+  z-index: 1;
+}
+
+/* Bạn xuất dải nhân vật OC nét vẽ tay ở dưới thành file oc-banner.png */
+body::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 180px;
+  background: url('oc-banner.png') no-repeat bottom center/contain;
+  z-index: 3;
+}
