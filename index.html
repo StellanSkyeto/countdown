@@ -1,21 +1,219 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>New Year Countdown</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy New Year Countdown</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts for Ultra-Condensed look -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Font tùy chỉnh mô phỏng đúng typography trong thiết kế */
+    .font-condensed {
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+    .font-sub {
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    /* Background màu tím pastel chuẩn thiết kế */
+    body {
+      background-color: #b7a0cd;
+      color: #111;
+      overflow-x: hidden;
+      font-family: sans-serif;
+    }
+
+    /* Hiệu ứng Floating nhẹ cho Skyeto và Chú ma */
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-8px) rotate(1.5deg); }
+    }
+    @keyframes ghostFloat {
+      0%, 100% { transform: translateY(0px) scale(1); }
+      50% { transform: translateY(-6px) scale(1.05); }
+    }
+
+    .animate-skyeto {
+      animation: floatSlow 3.5s ease-in-out infinite;
+    }
+    .animate-ghost {
+      animation: ghostFloat 2.8s ease-in-out infinite;
+    }
+
+    /* Tùy chỉnh màu sắc chính xác theo thiết kế gốc */
+    .bg-banner {
+      background-color: rgba(220, 185, 208, 0.45);
+    }
+    .bg-orange-box {
+      background-color: #f17b4c;
+    }
+    .bg-purple-box {
+      background-color: #9c67fd;
+    }
+
+    /* Font size cho các con số đếm ngược khổng lồ */
+    .number-text {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(4.5rem, 12vw, 9.5rem);
+      line-height: 0.85;
+      color: #ffffff;
+    }
+    .sec-number-text {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2.2rem, 6vw, 4.2rem);
+      line-height: 0.9;
+      color: #ffffff;
+    }
+  </style>
 </head>
-<body>
+<body class="min-h-screen flex items-center justify-center p-4 select-none">
 
-  <h1>Happy New Year Countdown</h1>
+  <!-- Container chính giữ đúng tỷ lệ khung hình & bố cục UI gốc -->
+  <div class="relative w-full max-w-xl md:max-w-2xl bg-[#b7a0cd] aspect-square flex flex-col justify-between p-6 sm:p-10 overflow-hidden shadow-2xl rounded-xl">
+    
+    <!-- Top Ghost Doodle Icon (Phía trên bên phải) -->
+    <div class="absolute top-4 right-6 sm:right-10 w-16 sm:w-20 animate-ghost z-20 opacity-80">
+      <!-- Fallback SVG icon Ma quỷ nếu không có file ghost.png -->
+      <svg viewBox="0 0 100 100" fill="none" stroke="#2a1e27" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M 20,80 Q 20,20 50,20 Q 80,20 80,80 Q 70,70 60,80 Q 50,70 40,80 Q 30,70 20,80 Z" />
+        <path d="M 35,45 L 45,55 L 35,55 Z" fill="#2a1e27" />
+        <path d="M 65,45 L 55,55 L 65,55 Z" fill="#2a1e27" />
+        <path d="M 40,65 Q 50,75 60,65" stroke-width="6" />
+      </svg>
+    </div>
 
-  <div id="countdown">
-    <span id="days">00</span> Days 
-    <span id="hours">00</span> Hours 
-    <span id="minutes">00</span> Minutes 
-    <span id="seconds">00</span> Seconds
+    <!-- Header Title Banner -->
+    <div class="w-full mt-4 sm:mt-6 z-10">
+      <div class="bg-banner py-2 px-3 sm:px-5 -mx-6 sm:-mx-10 transform -rotate-1">
+        <h1 class="font-condensed text-3xl sm:text-5xl md:text-6xl font-black text-black tracking-tighter leading-none">
+          HAPPY NEW YEAR COUNTDOWN
+        </h1>
+        <p class="font-sub text-sm sm:text-lg font-bold text-black tracking-tight mt-1 ml-1 sm:ml-2">
+          would you survive that night &gt;:]
+        </p>
+      </div>
+    </div>
+
+    <!-- Middle Main Countdown (Days - Hours - Minutes) -->
+    <div class="grid grid-cols-3 gap-2 sm:gap-4 my-auto z-10">
+      
+      <!-- Box Days -->
+      <div class="bg-orange-box rounded-xl p-2 sm:p-4 flex flex-col justify-between items-center relative aspect-[4/5] shadow-sm">
+        <div id="days" class="number-text mt-1">00</div>
+        <span class="font-condensed text-white text-xl sm:text-3xl font-bold self-end mr-1 mb-1 lowercase">days</span>
+      </div>
+
+      <!-- Box Hours -->
+      <div class="bg-orange-box rounded-xl p-2 sm:p-4 flex flex-col justify-between items-center relative aspect-[4/5] shadow-sm">
+        <div id="hours" class="number-text mt-1">00</div>
+        <span class="font-condensed text-white text-xl sm:text-3xl font-bold self-end mr-1 mb-1 lowercase">hrs</span>
+      </div>
+
+      <!-- Box Minutes -->
+      <div class="bg-orange-box rounded-xl p-2 sm:p-4 flex flex-col justify-between items-center relative aspect-[4/5] shadow-sm">
+        <div id="minutes" class="number-text mt-1">00</div>
+        <span class="font-condensed text-white text-xl sm:text-3xl font-bold self-end mr-1 mb-1 lowercase">min</span>
+      </div>
+
+    </div>
+
+    <!-- Bottom Section: Skyeto OC Character & Milliseconds Counter -->
+    <div class="relative w-full flex items-end justify-between min-h-[140px] sm:min-h-[180px] z-10">
+      
+      <!-- Skyeto Character Container (Bên trái) -->
+      <div class="w-32 sm:w-48 md:w-56 -ml-3 -mb-2 z-20 animate-skyeto origin-bottom-left">
+        <!-- Load skyeto.png chuẩn từ thư mục cục bộ của bạn -->
+        <img 
+          src="skyeto.png" 
+          alt="Skyeto Character" 
+          class="w-full h-auto object-contain drop-shadow-md"
+          onerror="this.onerror=null; this.parentElement.innerHTML=getSkyetoSVG();"
+        />
+      </div>
+
+      <!-- Milliseconds Purple Box (Bên phải) -->
+      <div class="bg-purple-box rounded-2xl px-4 py-3 sm:px-6 sm:py-4 shadow-md ml-auto mb-2 sm:mb-4">
+        <div class="flex items-baseline space-x-1 sm:space-x-2">
+          <span id="seconds-milli" class="sec-number-text font-black">00.000</span>
+          <span class="font-condensed text-white text-2xl sm:text-4xl font-bold lowercase">seconds</span>
+        </div>
+      </div>
+
+    </div>
+
   </div>
-  <h2 id="message" style="display: none;">🎉 HAPPY NEW YEAR! 🎉</h2>
-  <script src="app.js"></script>
+
+  <!-- JavaScript đếm ngược siêu chính xác từng Millisecond -->
+  <script>
+    // Tính toán thời gian tới giao thừa năm tiếp theo
+    function getNextNewYear() {
+      const now = new Date();
+      const nextYear = now.getFullYear() + 1;
+      return new Date(`January 1, ${nextYear} 00:00:00`).getTime();
+    }
+
+    const targetTime = getNextNewYear();
+
+    const daysEl = document.getElementById('days');
+    const hoursEl = document.getElementById('hours');
+    const minutesEl = document.getElementById('minutes');
+    const secondsMilliEl = document.getElementById('seconds-milli');
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const diff = targetTime - now;
+
+      if (diff <= 0) {
+        daysEl.innerText = '00';
+        hoursEl.innerText = '00';
+        minutesEl.innerText = '00';
+        secondsMilliEl.innerText = '00.000';
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+      const millis = Math.floor(diff % 1000);
+
+      // Format định dạng 2 chữ số & 3 chữ số cho ms
+      daysEl.innerText = String(days).padStart(2, '0');
+      hoursEl.innerText = String(hours).padStart(2, '0');
+      minutesEl.innerText = String(minutes).padStart(2, '0');
+      
+      const secStr = String(seconds).padStart(2, '0');
+      const msStr = String(millis).padStart(3, '0');
+      secondsMilliEl.innerText = `${secStr}.${msStr}`;
+
+      requestAnimationFrame(updateCountdown);
+    }
+
+    // Chạy loop cập nhật liên tục mượt mà theo tần số quét màn hình
+    requestAnimationFrame(updateCountdown);
+
+    // Fallback SVG cho Skyeto nếu thiếu file ảnh skyeto.png
+    function getSkyetoSVG() {
+      return `
+        <svg viewBox="0 0 200 200" fill="none" class="w-full h-auto">
+          <path d="M 40,110 L 10,100 M 25,85 L 25,125 M 25,105 L 70,120" stroke="#f17b4c" stroke-width="6" stroke-linecap="round"/>
+          <circle cx="100" cy="90" r="50" fill="#2b2326"/>
+          <path d="M 65,50 Q 55,20 80,40 Z" fill="#f17b4c"/>
+          <path d="M 135,50 Q 145,20 120,40 Z" fill="#f17b4c"/>
+          <path d="M 70,80 Q 90,105 100,80" stroke="#f17b4c" stroke-width="7" stroke-linecap="round"/>
+          <polygon points="125,65 130,75 140,75 132,82 135,92 125,86 115,92 118,82 110,75 120,75" fill="#fbd350"/>
+          <rect x="75" y="130" width="50" height="50" rx="10" fill="#2b2326"/>
+          <rect x="70" y="125" width="60" height="20" rx="5" fill="#99898c"/>
+        </svg>
+      `;
+    }
+  </script>
 </body>
 </html>
